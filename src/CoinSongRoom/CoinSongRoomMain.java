@@ -15,7 +15,7 @@ public class CoinSongRoomMain {
 
 		while (true) {
 			System.out.println("=🎙=🎵=🎵=🎵=♬=♪=🎙=코 인 노 래 방=🎙=♪=♬=🎵=🎵=🎵=🎙=");
-			
+
 			if (loginOk) {
 				System.out.println("--ㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡ--");
 				System.out.println("|  1.코인충전   2.가수검색    3.노래시작   4.사용내역     |");
@@ -33,28 +33,47 @@ public class CoinSongRoomMain {
 			int menu = sc.nextInt();
 
 			if (menu == 1) {
-				if(loginOk) {
+				if (loginOk) {
+
 					service.coinCharge();
-					
-				}else {
+
+				} else {
 					service.save();
 				}
 
-			
 			} else if (menu == 2) {
-				if(loginOk) {
+				if (loginOk) {
 					service.search();
-					
-				}else {
+
+				} else {
 					service.loginCheck();
 				}
-				
-				
 
 			} else if (menu == 3) {
-				service.findAll();
 
-			} else if (menu == 0) {
+				if (loginOk) {
+					service.singStart();
+
+				} else {
+					service.findAll();
+				}
+			} else if (menu == 4 && loginOk) {
+				service.userHistory();
+
+			} else if (menu == 5 && loginOk) {
+				service.recommend();
+
+			} else if (menu == 6 && loginOk) {
+				service.update();
+
+			} else if (menu == 7 && loginOk) {
+				service.delete();
+
+			} else if (menu == 8 && loginOk) {
+				service.logout();
+				loginOk = false;
+
+			} else if (menu == 0 && loginOk) {
 				break;
 
 			} else {

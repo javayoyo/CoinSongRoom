@@ -10,15 +10,11 @@ public class CoinSongRoomDTO {
 
 
 	
-	
-	
 	private String id;
 	private String password;
 	private String nickname;
 	private long balance;
 	private String joinDate;
-
-
 
 
 	public CoinSongRoomDTO() {
@@ -60,6 +56,13 @@ public class CoinSongRoomDTO {
 	}
 	public void print() {
 		System.out.printf("%s\t%s\t%s\t%s\t%d\t%s\n",id,password,nickname,balance,joinDate);
+	}
+
+
+	@Override
+	public String toString() {
+		return "[id=" + id + ", password=" + password + ", nickname=" + nickname + ", balance="
+				+ balance + ", joinDate=" + joinDate + "]";
 	}
 
 
