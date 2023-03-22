@@ -36,6 +36,7 @@ public class CoinSongRoomRepository {
 
 	public List<CoinSongRoomDTO> findAll() {
 		return cList;
+		
 	}
 
 	public String getCno(String id, String password) {
@@ -62,6 +63,38 @@ public class CoinSongRoomRepository {
 		}
 		return false;
 	}
+	
+	public BreakdownDTO singStart() {
+		for(BreakdownDTO b : bList) {
+			return b;
+		}return null;
+	}
+	
+	public CoinSongRoomDTO findById(String id, String password) {
+		for (CoinSongRoomDTO c : cList) {
+			if (c.getId().equals(id) && c.getPassword().equals(password)) {
+				return c;
+			}
+		}
+		return null;
+	}
+	
+	public List<BreakdownDTO> breakList(String cno) {
+		List<BreakdownDTO> list = new ArrayList<>();
+		for (BreakdownDTO b : bList) {
+		if (b.getCno().equals(cno)) {
+		list.add(b);
+		}
+		}
+		return list;
+		}
+	
+	
+	
+	
+	
+	
+	
 
 	public boolean update(String id, String password, String updatePassword) {
 		for (CoinSongRoomDTO c : cList) {

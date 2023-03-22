@@ -21,17 +21,17 @@ public class CoinSongRoomService {
 
 	public void save() {
 		CoinSongRoomDTO coinSongRoomDTO = new CoinSongRoomDTO();
-		while(true) {
-		System.out.print("아이디 > ");
-		coinSongRoomDTO.setId(sc.next());
-		if(repository.dupCheck(coinSongRoomDTO.getId())) {
-			System.out.println("이미 사용중인 아이디 입니다. 다시 입력해주세요 ");
-			continue;
-		}else {
-			break;
+		while (true) {
+			System.out.print("아이디 > ");
+			coinSongRoomDTO.setId(sc.next());
+			if (repository.dupCheck(coinSongRoomDTO.getId())) {
+				System.out.println("이미 사용중인 아이디 입니다. 다시 입력해주세요 ");
+				continue;
+			} else {
+				break;
+			}
 		}
-		}
-		
+
 		System.out.print("비밀번호 > ");
 		coinSongRoomDTO.setPassword(sc.next());
 		System.out.print("닉네임 > ");
@@ -68,8 +68,8 @@ public class CoinSongRoomService {
 		System.out.println("회원번호\t아이디\t비밀번호\t닉네임\t잔액\t가입일");
 		System.out.println("-----------------------------------------------------------------");
 		for (CoinSongRoomDTO c : clist) {
-			System.out.println(c);
 
+			System.out.println(c.toString());
 		}
 
 	}
@@ -113,9 +113,17 @@ public class CoinSongRoomService {
 	}
 
 	public void singStart() {
+		
+		BreakdownDTO breakdownDTO = repository.singStart();
+		System.out.println("잔 액 : "+ breakdownDTO.getTotalMoney() +"원");
+		System.out.println("┌───────────────────────────────┐");
+		System.out.println("|  ㉿  ①   ②    ③    ④   ⑤       |");
+		System.out.println("|     ⑥   ⑦    ⑧    ⑨   ⓞ   ⊙   |");
+		System.out.println("└───────────────────────────────┘");
 
 		System.out.println("번호 입력 > ");
 		int num = sc.nextInt();
+		System.out.println(" 간 주 중 . . . ");
 
 		if (num == 20230102) {
 			System.out.println("┌ 20230102 뉴진스 - Ditto ┐");
@@ -153,7 +161,72 @@ public class CoinSongRoomService {
 		}
 
 	}
+	
+	public void findById() {
+		CoinSongRoomDTO coinSongRoomDTO = repository.findById(loginId, loginPassword);
+		
+		
+		List<BreakdownDTO> bList = repository.breakList(coinSongRoomDTO.getCno());
+		if (bList.size() == 0) {
+		System.out.println("통합 내역이 없습니다");
+		} else {
+		System.out.println("┌ 통    합    내    역 ┐");
+		System.out.println("-------------------------------------------------------");
+		System.out.println("회원번호\t구분\t금 액\t잔 액\t발생일");
+		
+		
+		for (BreakdownDTO b : bList) {
+		System.out.println(b.toString());
+		}
+		}
+		System.out.println("-------------------------------------------------------");
+		}
+		
+		
+		
+		
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
 
+	
+	public void recommend() {
+		System.out.println(" ☞ 오늘의 추천 노래는 ? ☜ ");
+		int num = (int) (Math.random() * 5) + 1;
+
+		if (num == 1) {
+			System.out.println(" 드라이브 하면서 듣기좋은 ");
+			System.out.println(" ⇒ 20220405 아이브 - LOVE DIVE ");
+
+		} else if (num == 2) {
+			System.out.println(" 과제할때 들으면 A+ 받는 ");
+			System.out.println(" ⇒ 20230206 부석순 - 파이팅해야지 ");
+		} else if (num == 3) {
+			System.out.println(" 시대를 역주행하는 플레이리스트 ");
+			System.out.println(" ⇒ 20220330 윤하 - 오르트 구름 ");
+		} else if (num == 4) {
+			System.out.println(" 01노래는 못참ㅈ1 ");
+			System.out.println(" ⇒ 20221017 아이들 - Nxde ");
+		} else {
+			System.out.println(" 맑은 날, 상쾌한 시작을 위한 ");
+			System.out.println(" ⇒ 20230102 뉴진스 - Ditto ");
+		}
+	}
+	
+	
+	
+	
+	
+	
+	
 	public void update() {
 		System.out.println("비밀번호 확인 > ");
 		String password = sc.next();
@@ -187,27 +260,7 @@ public class CoinSongRoomService {
 		System.out.println("로그아웃");
 
 	}
-	public void recommend () {
-		System.out.println(" ☞ 오늘의 추천 노래는 ? ☜ ");
-		int num = (int)(Math.random()*5)+1;
-		
-		if(num == 1) {
-			System.out.println(" 드라이브 하면서 듣기좋은 ");
-			System.out.println(" ⇒ 20220405 아이브 - LOVE DIVE ");
-			
-		}else if (num == 2) {
-			System.out.println(" 과제할때 들으면 A+ 받는 ");
-			System.out.println(" ⇒ 20230206 부석순 - 파이팅해야지 ");
-		}else if (num == 3) {
-			System.out.println(" 시대를 역주행하는 플레이리스트 ");
-			System.out.println(" ⇒ 20220330 윤하 - 오르트 구름 ");
-		}else if (num == 4) {
-			System.out.println(" 01노래는 못참ㅈ1 ");
-			System.out.println(" ⇒ 20221017 아이들 - Nxde ");
-		}else {
-			System.out.println(" 맑은 날, 상쾌한 시작을 위한 ");
-			System.out.println(" ⇒ 20230102 뉴진스 - Ditto ");
-		}
-	}
+
+	
 
 }

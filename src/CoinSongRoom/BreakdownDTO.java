@@ -52,5 +52,6 @@ public class BreakdownDTO {
 	public String toString() {
 		String str = cno + "\t" + division + "\t" + dealMoney + "\t" + totalMoney + "\t" + dealDate;
 		return str;
+		//회원번호.구분,거래금액,거래후잔액,거래일
 	}
 }
