@@ -1,28 +1,30 @@
+
 package CoinSongRoom;
 
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 
 public class CoinSongRoomDTO {
-	
-	
+
+	private static int number = 100;
 	private final static DateTimeFormatter DTF = DateTimeFormatter.ofPattern("yy/MM/dd hh:mm:ss");
 
-
-	
+	private String cno;
 	private String id;
 	private String password;
 	private String nickname;
 	private long balance;
 	private String joinDate;
 
-
 	public CoinSongRoomDTO() {
-		
+		this.cno = "C" + number++;
 		this.joinDate = DTF.format(LocalDateTime.now());
 	}
-	
-	
+
+	public String getCno() {
+		return cno;
+	}
+
 	public String getId() {
 		return id;
 	}
@@ -54,21 +56,11 @@ public class CoinSongRoomDTO {
 	public void setBalance(long balance) {
 		this.balance = balance;
 	}
-	public void print() {
-		System.out.printf("%s\t%s\t%s\t%s\t%d\t%s\n",id,password,nickname,balance,joinDate);
-	}
-
 
 	@Override
 	public String toString() {
-		return "[id=" + id + ", password=" + password + ", nickname=" + nickname + ", balance="
-				+ balance + ", joinDate=" + joinDate + "]";
+		String str = cno + "\t" + id + "\t" + password + "\t" + nickname + "\t" + balance + "\t" + joinDate;
+		return str;
 	}
-
-
-
-
-
-
 
 }
