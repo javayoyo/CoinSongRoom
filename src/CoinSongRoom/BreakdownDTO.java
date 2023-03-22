@@ -4,18 +4,23 @@ import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 
 public class BreakdownDTO {
+	
 	private final static DateTimeFormatter DTF = DateTimeFormatter.ofPattern("yy/MM/dd hh:mm:ss");
 
+	
 	private String cno;
 	private String division;
 	private long dealMoney;
 	private long totalMoney;
 	private String dealDate;
+	private long money;
 
 	public BreakdownDTO() {
 		this.dealDate = DTF.format(LocalDateTime.now());
 	}
-
+	public long money() {
+		return 500;
+	}
 	public String getCno() {
 		return cno;
 	}

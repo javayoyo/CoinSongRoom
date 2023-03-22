@@ -5,6 +5,8 @@ import java.util.List;
 import java.util.HashMap;
 import java.util.Map;
 
+import day17_Bank.BreakdownDTO;
+
 public class CoinSongRoomRepository {
 
 	Map<String, CoinSongRoomDTO> sMap = new HashMap<>();
@@ -18,6 +20,7 @@ public class CoinSongRoomRepository {
 		return repository;
 	}
 
+	
 	List<CoinSongRoomDTO> cList = new ArrayList<>();
 	List<BreakdownDTO> bList = new ArrayList<>();
 
@@ -63,6 +66,33 @@ public class CoinSongRoomRepository {
 		}
 		return false;
 	}
+	
+	public boolean coinUse(String cno, long money) {
+		for (String s : sMap.keySet()) {
+			if (sMap.get(s).getCno().equals(cno)) {
+				if (sMap.get(s).getBalance() >= money) {
+					sMap.get(s).setBalance(sMap.get(s).getBalance() - money);
+					BreakdownDTO breakdownDTO = new BreakdownDTO();
+					breakdownDTO.setCno(cno);
+					breakdownDTO.setDivision("사용");
+					breakdownDTO.setDealMoney(money);
+					breakdownDTO.setTotalMoney(sMap.get(s).getBalance());
+					bList.add(breakdownDTO);
+					return true;
+				} else {
+					return false;
+				}
+			}
+		}
+		return false;
+	}
+	
+	
+	
+	
+	
+	
+	
 	
 	public BreakdownDTO singStart() {
 		for(BreakdownDTO b : bList) {

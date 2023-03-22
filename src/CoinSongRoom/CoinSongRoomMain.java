@@ -73,7 +73,7 @@ public class CoinSongRoomMain {
 				service.logout();
 				loginOk = false;
 
-			} else if (menu == 0) {
+			} else if (menu == 0 ) {
 
 				break;
 

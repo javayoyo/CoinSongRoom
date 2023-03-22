@@ -36,7 +36,7 @@ public class CoinSongRoomService {
 		coinSongRoomDTO.setPassword(sc.next());
 		System.out.print("닉네임 > ");
 		coinSongRoomDTO.setNickname(sc.next());
-		repository.save(coinSongRoomDTO);
+		
 		if (repository.save(coinSongRoomDTO)) {
 			System.out.println("회원가입 성공");
 
@@ -90,6 +90,31 @@ public class CoinSongRoomService {
 
 		}
 	}
+	
+	public void coinUse() {
+		String cno = repository.getCno(loginId, loginPassword);
+		if (cno == null) {
+			System.out.println("로그인 오류");
+		} else {
+			
+			if (repository.coinUse(cno, money)) {
+				System.out.println("간주중....");
+			} else {
+				System.out.println("잔액부족");
+			}
+		}
+	}
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
 
 	public void search() {
 
@@ -123,6 +148,8 @@ public class CoinSongRoomService {
 
 		System.out.println("번호 입력 > ");
 		int num = sc.nextInt();
+		
+		service.coinUse();
 		System.out.println(" 간 주 중 . . . ");
 
 		if (num == 20230102) {
@@ -174,7 +201,6 @@ public class CoinSongRoomService {
 		System.out.println("-------------------------------------------------------");
 		System.out.println("회원번호\t구분\t금 액\t잔 액\t발생일");
 		
-		
 		for (BreakdownDTO b : bList) {
 		System.out.println(b.toString());
 		}
@@ -182,21 +208,7 @@ public class CoinSongRoomService {
 		System.out.println("-------------------------------------------------------");
 		}
 		
-		
-		
-		
 	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-
 	
 	public void recommend() {
 		System.out.println(" ☞ 오늘의 추천 노래는 ? ☜ ");
@@ -223,10 +235,6 @@ public class CoinSongRoomService {
 	
 	
 	
-	
-	
-	
-	
 	public void update() {
 		System.out.println("비밀번호 확인 > ");
 		String password = sc.next();
@@ -248,6 +256,7 @@ public class CoinSongRoomService {
 		if (repository.delete(loginId, loginPassword)) {
 			System.out.println("삭제 완료");
 			return false;
+			
 		} else {
 			System.out.println("삭제 실패");
 			return true;
