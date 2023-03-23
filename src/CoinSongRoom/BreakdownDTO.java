@@ -5,22 +5,20 @@ import java.time.format.DateTimeFormatter;
 
 public class BreakdownDTO {
 	
+	
+	
 	private final static DateTimeFormatter DTF = DateTimeFormatter.ofPattern("yy/MM/dd hh:mm:ss");
 
-	
 	private String cno;
 	private String division;
 	private long dealMoney;
 	private long totalMoney;
 	private String dealDate;
-	private long money;
 
 	public BreakdownDTO() {
 		this.dealDate = DTF.format(LocalDateTime.now());
 	}
-	public long money() {
-		return 500;
-	}
+
 	public String getCno() {
 		return cno;
 	}
@@ -57,6 +55,6 @@ public class BreakdownDTO {
 	public String toString() {
 		String str = cno + "\t" + division + "\t" + dealMoney + "\t" + totalMoney + "\t" + dealDate;
 		return str;
-		//회원번호.구분,거래금액,거래후잔액,거래일
+
 	}
 }

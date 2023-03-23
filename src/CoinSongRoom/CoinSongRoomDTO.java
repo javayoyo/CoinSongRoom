@@ -1,4 +1,3 @@
-
 package CoinSongRoom;
 
 import java.time.LocalDateTime;
@@ -7,7 +6,7 @@ import java.time.format.DateTimeFormatter;
 public class CoinSongRoomDTO {
 
 	private static int number = 100;
-	
+
 	private final static DateTimeFormatter DTF = DateTimeFormatter.ofPattern("yy/MM/dd hh:mm:ss");
 
 	private String cno;

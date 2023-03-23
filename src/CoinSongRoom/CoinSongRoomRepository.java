@@ -5,8 +5,6 @@ import java.util.List;
 import java.util.HashMap;
 import java.util.Map;
 
-import day17_Bank.BreakdownDTO;
-
 public class CoinSongRoomRepository {
 
 	Map<String, CoinSongRoomDTO> sMap = new HashMap<>();
@@ -39,7 +37,7 @@ public class CoinSongRoomRepository {
 
 	public List<CoinSongRoomDTO> findAll() {
 		return cList;
-		
+
 	}
 
 	public String getCno(String id, String password) {
@@ -66,40 +64,36 @@ public class CoinSongRoomRepository {
 		}
 		return false;
 	}
-	
+
 	public boolean coinUse(String cno, long money) {
-		for (String s : sMap.keySet()) {
-			if (sMap.get(s).getCno().equals(cno)) {
-				if (sMap.get(s).getBalance() >= money) {
-					sMap.get(s).setBalance(sMap.get(s).getBalance() - money);
+		for (CoinSongRoomDTO c : cList) {
+			if (c.getCno().equals(cno)) {
+				if (c.getBalance() >= money) {
+					c.setBalance(c.getBalance() - money);
 					BreakdownDTO breakdownDTO = new BreakdownDTO();
 					breakdownDTO.setCno(cno);
 					breakdownDTO.setDivision("사용");
 					breakdownDTO.setDealMoney(money);
-					breakdownDTO.setTotalMoney(sMap.get(s).getBalance());
+					breakdownDTO.setTotalMoney(c.getBalance());
 					bList.add(breakdownDTO);
 					return true;
-				} else {
-					return false;
+				
+				}else {
+					System.out.println("잔액이 부족합니다");
+					
 				}
 			}
 		}
 		return false;
 	}
-	
-	
-	
-	
-	
-	
-	
-	
+
 	public BreakdownDTO singStart() {
-		for(BreakdownDTO b : bList) {
+		for (BreakdownDTO b : bList) {
 			return b;
-		}return null;
+		}
+		return null;
 	}
-	
+
 	public CoinSongRoomDTO findById(String id, String password) {
 		for (CoinSongRoomDTO c : cList) {
 			if (c.getId().equals(id) && c.getPassword().equals(password)) {
@@ -108,23 +102,16 @@ public class CoinSongRoomRepository {
 		}
 		return null;
 	}
-	
+
 	public List<BreakdownDTO> breakList(String cno) {
 		List<BreakdownDTO> list = new ArrayList<>();
 		for (BreakdownDTO b : bList) {
-		if (b.getCno().equals(cno)) {
-		list.add(b);
-		}
+			if (b.getCno().equals(cno)) {
+				list.add(b);
+			}
 		}
 		return list;
-		}
-	
-	
-	
-	
-	
-	
-	
+	}
 
 	public boolean update(String id, String password, String updatePassword) {
 		for (CoinSongRoomDTO c : cList) {
@@ -145,17 +132,14 @@ public class CoinSongRoomRepository {
 		}
 		return false;
 	}
-	
+
 	public boolean dupCheck(String id) {
-		boolean find = false;
-		while(true) {
-			for(String key : sMap.keySet()) {
-				if(sMap.get(key).getId().equals(id)) {
-					return true;
-				}
+		for (CoinSongRoomDTO c : cList) {
+			if (c.getId().equals(id)) {
+				return true;
 			}
-			return false;
 		}
+		return false;
 	}
 
 }

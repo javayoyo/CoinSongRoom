@@ -4,6 +4,8 @@ import java.util.Scanner;
 
 public class CoinSongRoomMain {
 
+	private static final CoinSongRoomService CoinSongRoomservice = null;
+
 	public static void main(String[] args) {
 
 		Scanner sc = new Scanner(System.in);
@@ -17,13 +19,13 @@ public class CoinSongRoomMain {
 
 			if (loginOk) {
 				System.out.println("┌──────────────────────────────────────────────┐");
-				System.out.println("|   1.코인충전   2.가수검색     3.노래시작   4.통합내역   |");
-				System.out.println("|  5.추천노래 6.비밀번호수정  7.회원탈퇴 8.로그아웃  0.종료 |");
+				System.out.println("|  1.코인충전 2.가수검색 3.노래시작 4.통합내역            |");
+				System.out.println("| 5.추천노래 6.비밀번호수정 7.회원탈퇴 8.로그아웃 0.종료    |");
 				System.out.println("└──────────────────────────────────────────────┘");
 
 			} else {
 				System.out.println("┌──────────────────────────────────────────────┐");
-				System.out.println("|     1.회원가입  2.로그인  3.리스트  0.종료           |");
+				System.out.println("|       1.회원가입  2.로그인  3.리스트 0.종료          |");
 				System.out.println("└──────────────────────────────────────────────┘");
 			}
 
@@ -52,6 +54,9 @@ public class CoinSongRoomMain {
 
 				if (loginOk) {
 					service.singStart();
+					service.coinUse();
+					
+					
 
 				} else {
 					service.findAll();
@@ -67,13 +72,13 @@ public class CoinSongRoomMain {
 
 			} else if (menu == 7 && loginOk) {
 				service.delete();
-				
+				loginOk = false;
 
 			} else if (menu == 8 && loginOk) {
 				service.logout();
 				loginOk = false;
 
-			} else if (menu == 0 ) {
+			} else if (menu == 0) {
 
 				break;
 
@@ -82,7 +87,6 @@ public class CoinSongRoomMain {
 			}
 			System.out.println();
 
-			
 		}
 		System.out.println("프로그램 종료");
 	}
