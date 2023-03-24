@@ -18,7 +18,6 @@ public class CoinSongRoomRepository {
 		return repository;
 	}
 
-	
 	List<CoinSongRoomDTO> cList = new ArrayList<>();
 	List<BreakdownDTO> bList = new ArrayList<>();
 
@@ -49,14 +48,14 @@ public class CoinSongRoomRepository {
 		return null;
 	}
 
-	public boolean coinCharge(String cno, long money) {
+	public boolean coinCharge(String cno, long dealmoney) {
 		for (CoinSongRoomDTO c : cList) {
 			if (c.getCno().equals(cno)) {
-				c.setBalance(c.getBalance() + money);
+				c.setBalance(c.getBalance() + dealmoney);
 				BreakdownDTO breakdownDTO = new BreakdownDTO();
 				breakdownDTO.setCno(cno);
 				breakdownDTO.setDivision("충전");
-				breakdownDTO.setDealMoney(money);
+				breakdownDTO.setDealMoney(dealmoney);
 				breakdownDTO.setTotalMoney(c.getBalance());
 				bList.add(breakdownDTO);
 				return true;
@@ -77,24 +76,24 @@ public class CoinSongRoomRepository {
 					breakdownDTO.setTotalMoney(c.getBalance());
 					bList.add(breakdownDTO);
 					return true;
-				
-				}else {
+
+				} else {
 					System.out.println("잔액이 부족합니다");
-					
+
 				}
 			}
 		}
 		return false;
 	}
 
-	public BreakdownDTO singStart() {
-		for (BreakdownDTO b : bList) {
-			return b;
+	public CoinSongRoomDTO singStart() {
+		for (CoinSongRoomDTO c : cList) {
+			return c;
 		}
 		return null;
 	}
 
-	public CoinSongRoomDTO findById(String id, String password) {
+	public CoinSongRoomDTO findByHistory(String id, String password) {
 		for (CoinSongRoomDTO c : cList) {
 			if (c.getId().equals(id) && c.getPassword().equals(password)) {
 				return c;

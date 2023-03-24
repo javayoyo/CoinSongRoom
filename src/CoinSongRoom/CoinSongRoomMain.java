@@ -19,13 +19,13 @@ public class CoinSongRoomMain {
 
 			if (loginOk) {
 				System.out.println("┌──────────────────────────────────────────────┐");
-				System.out.println("|  1.코인충전 2.가수검색 3.노래시작 4.통합내역            |");
-				System.out.println("| 5.추천노래 6.비밀번호수정 7.회원탈퇴 8.로그아웃 0.종료    |");
+				System.out.println("|     1.코인충전 2.가수검색 3.노래시작 4.통합내역      |");
+				System.out.println("| 5.추천노래 6.비밀번호수정 7.회원탈퇴 8.로그아웃 0.종료 |");
 				System.out.println("└──────────────────────────────────────────────┘");
 
 			} else {
 				System.out.println("┌──────────────────────────────────────────────┐");
-				System.out.println("|       1.회원가입  2.로그인  3.리스트 0.종료          |");
+				System.out.println("|      1.회원가입 2.로그인 3.리스트 0.종료           |");
 				System.out.println("└──────────────────────────────────────────────┘");
 			}
 
@@ -55,14 +55,12 @@ public class CoinSongRoomMain {
 				if (loginOk) {
 					service.singStart();
 					service.coinUse();
-					
-					
 
 				} else {
 					service.findAll();
 				}
 			} else if (menu == 4 && loginOk) {
-				service.findById();
+				service.findByHistory();
 
 			} else if (menu == 5 && loginOk) {
 				service.recommend();
